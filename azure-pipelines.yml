@@ -8,7 +8,8 @@ steps:
 - script: |
     echo "JAVA_HOME=$JAVA_HOME"
     java -version
-  displayName: Verify Java
+    mvn -version
+  displayName: Verify Java and Maven
 
 - task: Maven@3
   inputs:
