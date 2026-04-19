@@ -6,8 +6,12 @@ pool:
 
 steps:
 - script: |
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-23.jdk/Contents/Home
+    export PATH=$JAVA_HOME/bin:$PATH
     echo "JAVA_HOME=$JAVA_HOME"
+    which java
     java -version
+    which mvn
     mvn -version
   displayName: Verify Java and Maven
 
