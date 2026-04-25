@@ -67,7 +67,7 @@ stages:
           rm -f  /opt/tomcat/apache-tomcat-10.1.54/webapps/webapp.war
 
           echo "Deploying new WAR..."
-          cp $(Pipeline.Workspace)/war/*.war /opt/tomcat/apache-tomcat-10.1.54/webapps/
+          cp $(Pipeline.Workspace)/war/webapp/target/*.war /opt/tomcat/apache-tomcat-10.1.54/webapps/
           echo "Deployment completed."
         displayName: Deploy WAR to Tomcat
 
