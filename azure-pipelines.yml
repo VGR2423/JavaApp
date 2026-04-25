@@ -18,7 +18,6 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'Path'
     jdkDirectory: '$(JAVA_HOME)'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
