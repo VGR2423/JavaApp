@@ -60,7 +60,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         inputs:
           artifact: 'warfile'
-          path: '$(Pipeline.Workspace)/war'
+          path: '$(Pipeline.Workspace)/war/webapp/target/'
       - script: |
           echo "Removing old deployment..."
           rm -rf opt/tomcat/apache-tomcat-10.1.54/webapps/webapp
