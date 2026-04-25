@@ -5,30 +5,39 @@ pool:
   name: SelfHostedPool
 
 steps:
-- script: 
-    export JAVA_HOME="$(/usr/libexec/java_home -v 23)";
-    export PATH="$JAVA_HOME/bin:$PATH";
-    echo "JAVA_HOME=$JAVA_HOME";
-    ls -l "$JAVA_HOME/bin/java";
-    java -version;
-    mvn -version;
+# Install / register JDK 23 for the Maven task
+- task: JavaToolInstaller@0
+  displayName: Install JDK 23
+  inputs:
+    versionSpec: '23'
+    jdkArchitectureOption: 'arm64'
+    jdkSourceOption: 'PreInstalled'
+
+# (Optional) Verify Java & Maven – for logging only
+- script: |
+    echo "JAVA_HOME=$JAVA_HOME"
+    java -version
+    mvn -version
   displayName: Verify Java and Maven
 
+# Maven build
 - task: Maven@3
+  displayName: Maven Package
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
-    jdkDirectory: '$(JAVA_HOME)'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
+# Copy WAR files
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: '**/*.war'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
+# Publish artifacts
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
