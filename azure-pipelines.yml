@@ -22,7 +22,7 @@ steps:
     goals: 'package'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'Path'
-    jdkUserInputPath: '/opt/homebrew/Cellar/openjdk@23/23.0.2/libexec/openjdk.jdk/Contents/Home'
+    jdkUserInputPath: '/Users/venugopalreddycholleti/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
 
